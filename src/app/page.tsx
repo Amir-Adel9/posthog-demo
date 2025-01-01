@@ -9,6 +9,11 @@ export default async function Home() {
     .then((res) => res.json())
     .then((res) => res.pageViewCount);
 
+  const weeklyActiveUsers = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/post-hog/insights/weekly-active-users`
+  )
+    .then((res) => res.json())
+    .then((res) => res.weeklyActiveUsersCount);
   return (
     <div className='min-h-screen font-[family-name:var(--font-geist-sans)]'>
       <header className='flex items-center border-b border-gray-200 p-4 mb-8'>
@@ -28,6 +33,14 @@ export default async function Home() {
           <h6 className='text-lg font-bold'>Page Views</h6>
           <div className='border border-gray-200 rounded-md px-20 py-10'>
             <p className='text-4xl font-bold text-center'>{pageViews}</p>
+          </div>
+        </div>
+        <div className='flex flex-col gap-4'>
+          <h6 className='text-lg font-bold'>Weekly active users (WAUs)</h6>
+          <div className='border border-gray-200 rounded-md px-20 py-10'>
+            <p className='text-4xl font-bold text-center'>
+              {weeklyActiveUsers}
+            </p>
           </div>
         </div>
       </main>
