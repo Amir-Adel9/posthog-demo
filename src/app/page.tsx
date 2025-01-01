@@ -15,6 +15,7 @@ export default async function Home() {
   )
     .then((res) => res.json())
     .then((res) => res.weeklyActiveUsersCount);
+
   return (
     <div className='min-h-screen font-[family-name:var(--font-geist-sans)] flex flex-col'>
       <header className='flex items-center border-b border-gray-200 p-4 mb-8'>
