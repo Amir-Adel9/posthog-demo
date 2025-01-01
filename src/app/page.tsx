@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function Home() {
   const pageViews = await fetch(
@@ -15,7 +16,7 @@ export default async function Home() {
     .then((res) => res.json())
     .then((res) => res.weeklyActiveUsersCount);
   return (
-    <div className='min-h-screen font-[family-name:var(--font-geist-sans)]'>
+    <div className='min-h-screen font-[family-name:var(--font-geist-sans)] flex flex-col'>
       <header className='flex items-center border-b border-gray-200 p-4 mb-8'>
         <Image
           aria-hidden
@@ -28,7 +29,7 @@ export default async function Home() {
           PostHog Demo
         </h3>
       </header>
-      <main className='flex flex-wrap gap-8 row-start-2 items-center sm:items-start p-20'>
+      <main className='flex flex-wrap flex-grow gap-8 row-start-2 items-center sm:items-start p-20'>
         <div className='flex flex-col gap-4'>
           <h6 className='text-lg font-bold'>Page Views</h6>
           <div className='border border-gray-200 rounded-md px-20 py-10'>
@@ -44,6 +45,19 @@ export default async function Home() {
           </div>
         </div>
       </main>
+      <footer className='border-t border-gray-200 p-4 mt-8 flex items-center justify-between'>
+        <p className='text-sm'>
+          This a demo demonstrating how to use the PostHog API in a Next.js
+          application
+        </p>
+        <Link
+          href='https://github.com/Amir-Adel9/posthog-demo'
+          target='_blank'
+          className='text-sm hover:underline'
+        >
+          Source Code on GitHub
+        </Link>
+      </footer>
     </div>
   );
 }
