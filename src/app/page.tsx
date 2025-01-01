@@ -1,6 +1,12 @@
 import Image from 'next/image';
 
-export default function Home() {
+export default async function Home() {
+  const pageViews = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/post-hog/insights/page-views`
+  )
+    .then((res) => res.json())
+    .then((res) => res.pageViewCount);
+
   return (
     <div className='min-h-screen font-[family-name:var(--font-geist-sans)]'>
       <header className='flex items-center border-b border-gray-200 p-4 mb-8'>
@@ -15,7 +21,14 @@ export default function Home() {
           PostHog Demo
         </h3>
       </header>
-      <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'></main>
+      <main className='flex flex-wrap gap-8 row-start-2 items-center sm:items-start p-20'>
+        <div className='flex flex-col gap-4'>
+          <h6 className='text-lg font-bold'>Page Views</h6>
+          <div className='border border-gray-200 rounded-md px-20 py-10'>
+            <p className='text-4xl font-bold text-center'>{pageViews}</p>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
